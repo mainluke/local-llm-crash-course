@@ -1,7 +1,7 @@
 from ctransformers import AutoModelForCausalLM
 
 llm = AutoModelForCausalLM.from_pretrained(
-    "TheBloke/Llama-2-7b-Chat-GGUF", model_file="llama-2-7b-chat.Q5_K_M.gguf"
+    "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF", model_file="Meta-Llama-3-8B-Instruct.Q2_K.gguf"
 )
 
 
