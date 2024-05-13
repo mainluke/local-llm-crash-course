@@ -21,9 +21,9 @@ llm = HuggingFacePipeline(pipeline=pipe)
 
 template = """
 System: {{
-You are a helpful assistant that provides information and engages in casual conversation.
-Respond naturally to user queries and provide useful information.
-Please, write a single reply only!}}
+Du bist ein sehr hilfreicher KI Assistent.
+Du antwortest dem Benutzer und gibst hilfreiche Antworten.
+Antworte in Deutsch, und mit einer Antwort.}}
 {history}
 User: {input}
 Assistant: 
@@ -38,8 +38,7 @@ async def initialize_chat():
     cl.user_session.set("llm_chain", llm_chain)
 
 def build_prompt(memory, user_input):
-    # Example function to construct a prompt from memory and new input
-    prompt_text = "\n".join(memory[-3:])  # Only use the last 3 turns if needed
+    prompt_text = "\n".join(memory[-3:])  
     prompt_text += f"\nUser: {user_input}\nAssistant:"
     return prompt_text
 
@@ -48,7 +47,8 @@ async def handle_message(message: cl.Message):
     llm_chain = cl.user_session.get("llm_chain")
     cb = cl.AsyncLangchainCallbackHandler()
     cb.answer_reached = True
-    # Correctly targeting a callable method to generate the response
     res = await cl.make_async(llm_chain)(message.content, callbacks=[cb])
     response_text = res['response']
     await cl.Message(content=response_text).send()
+
+
